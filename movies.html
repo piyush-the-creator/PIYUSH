@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Explore, look up, and analyze trending or high rating titles on CineVerse.">
+    <title>CineVerse | Discover Movies</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/movies.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Cine<span>Verse</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="movies.html" class="active">Movies</a></li>
+                <li><a href="anime.html">Anime</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="favorites.html">Watchlist</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button id="themeToggle" class="theme-btn"><i class="fas fa-moon"></i></button>
+                <div class="hamburger" id="hamburgerMenu">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="page-banner">
+        <div class="banner-overlay">
+            <h1>Cinematic Database</h1>
+            <p>Track current cinematic hits, discover timeless records, and monitor streaming metrics.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="filter-panel">
+            <div class="search-bar-extended">
+                <input type="text" id="movieSearchInput" placeholder="Search titles, themes, keywords...">
+                <button id="movieSearchBtn" class="btn btn-primary">Search</button>
+            </div>
+            <div class="filter-options">
+                <button class="filter-tab active" data-type="trending">Trending Now</button>
+                <button class="filter-tab" data-type="top_rated">Critically Acclaimed</button>
+                <button class="filter-tab" data-type="upcoming">Upcoming Releases</button>
+            </div>
+        </section>
+
+        <section class="grid-container" id="movieDisplayGrid">
+            </section>
+
+        <div class="pagination-controls">
+            <button id="prevPageBtn" class="btn btn-secondary" disabled>Previous</button>
+            <span id="currentPageLabel">Page 1</span>
+            <button id="nextPageBtn" class="btn btn-secondary">Next</button>
+        </div>
+    </main>
+
+    <div id="globalModal" class="modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-wrapper">
+            <button class="modal-close" id="modalCloseBtn">&times;</button>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <div id="toastContainer" class="toast-container"></div>
+    <button id="scrollToTop" class="scroll-to-top"><i class="fas fa-arrow-up"></i></button>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>Cine<span>Verse</span></h3>
+                <p>&copy; 2026 CineVerse Media Group.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/movies.js"></script>
+</body>
+</html>
