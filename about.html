@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn about CineVerse design goals, development, and system technology layers.">
+    <title>CineVerse | Specifications</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Cine<span>Verse</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="anime.html">Anime</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="favorites.html">Watchlist</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button id="themeToggle" class="theme-btn"><i class="fas fa-moon"></i></button>
+                <div class="hamburger" id="hamburgerMenu">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container separator-top">
+        <article class="about-card-wrapper">
+            <h1>About CineVerse</h1>
+            <p class="lead-text">CineVerse bridges tracking indexes for contemporary cinema assets, otaku media distribution archives, and breaking global press reporting structures into a unified user space.</p>
+            <hr class="divider">
+            <h3>Architecture Integration Framework Data Sources</h3>
+            <table class="spec-table">
+                <thead>
+                    <tr>
+                        <th>Platform Element</th>
+                        <th>Target System Provider</th>
+                        <th>Operational Protocol Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Cinema Databases</td>
+                        <td>The Movie Database (TMDb)</td>
+                        <td>REST API Over Secure Access Keys</td>
+                    </tr>
+                    <tr>
+                        <td>Anime Index Logs</td>
+                        <td>Jikan Engine API (MyAnimeList Core)</td>
+                        <td>Public Open Read Protocol</td>
+                    </tr>
+                    <tr>
+                        <td>Journalism Content</td>
+                        <td>GNews Core Framework Data Layer</td>
+                        <td>JSON REST Delivery Stream</td>
+                    </tr>
+                </tbody>
+            </table>
+        </article>
+    </main>
+
+    <script src="js/ui.js"></script>
+</body>
+</html>
