@@ -22,16 +22,15 @@ const HomeApp = {
         if (!container) return;
 
         const data = await CineVerseAPI.fetchTrendingMovies();
-        container.innerHTML = ''; // Dismiss loading wrappers
+        container.innerHTML = ''; 
 
         if (data && data.results) {
-            // Display first 4 elements for visual impact
             data.results.slice(0, 4).forEach(movie => {
                 const card = CineVerseUI.createItemCard(movie, 'movie');
                 container.appendChild(card);
             });
         } else {
-            container.innerHTML = '<p class="error-msg">Failed to retrieve current movie tracking items.</p>';
+            container.innerHTML = '<p class="error-msg">Failed to retrieve cinematic tracking items.</p>';
         }
     },
 
@@ -48,7 +47,7 @@ const HomeApp = {
                 container.appendChild(card);
             });
         } else {
-            container.innerHTML = '<p class="error-msg">Failed to retrieve tracking metrics for modern anime.</p>';
+            container.innerHTML = '<p class="error-msg">Failed to retrieve anime analytics metrics.</p>';
         }
     },
 
@@ -77,7 +76,7 @@ const HomeApp = {
                 container.appendChild(card);
             });
         } else {
-            container.innerHTML = '<p class="error-msg">Failed to establish active secure connection to newswire feeds.</p>';
+            container.innerHTML = '<p class="error-msg">Failed to establish connection to live newswire feeds. Verify limit allocations.</p>';
         }
     },
 
@@ -88,7 +87,6 @@ const HomeApp = {
 
         moodButtons.forEach(btn => {
             btn.addEventListener('click', async () => {
-                // Clear active states
                 moodButtons.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
 
@@ -96,13 +94,12 @@ const HomeApp = {
                 targetOutput.classList.remove('hidden');
 
                 const selectedMood = btn.getAttribute('data-mood');
-                let searchTarget = 'comedy'; // Base standard fallback parameter
+                let searchTarget = 'comedy'; 
 
-                if (selectedMood === 'sad') searchTarget = 'feel good';
+                if (selectedMood === 'sad') searchTarget = 'drama';
                 if (selectedMood === 'excited') searchTarget = 'action';
                 if (selectedMood === 'relaxed') searchTarget = 'slice of life';
 
-                // Fetch data matching the mood parameters
                 const results = await CineVerseAPI.searchAnime(searchTarget);
                 targetOutput.innerHTML = '';
 
@@ -111,9 +108,9 @@ const HomeApp = {
                         const card = CineVerseUI.createItemCard(anime, 'anime');
                         targetOutput.appendChild(card);
                     });
-                    CineVerseUI.showToast(`Mood system updated content matching dynamic query: ${searchTarget.toUpperCase()}`);
+                    CineVerseUI.showToast(`Mood system filtered by: ${searchTarget.toUpperCase()}`);
                 } else {
-                    targetOutput.innerHTML = '<p style="grid-column:1/-1;">No data found for this mood query.</p>';
+                    targetOutput.innerHTML = '<p style="grid-column:1/-1;">No data found matching profile.</p>';
                 }
             });
         });
@@ -135,7 +132,6 @@ const HomeApp = {
             }
 
             debounceTimeout = setTimeout(async () => {
-                // Execute high-speed search across the Jikan open anime catalog
                 const data = await CineVerseAPI.searchAnime(query);
                 dropdown.innerHTML = '';
 
@@ -145,7 +141,7 @@ const HomeApp = {
                         const row = document.createElement('div');
                         row.className = 'suggestion-item';
                         row.innerHTML = `
-                            <img src="${anime.images?.jpg?.image_url}" alt="mini-poster">
+                            <img src="${anime.images?.jpg?.image_url}" alt="poster">
                             <div>
                                 <div style="font-weight:600; font-size:0.9rem; text-overflow:ellipsis; overflow:hidden; white-space:nowrap; max-width:220px;">${anime.title}</div>
                                 <div style="font-size:0.75rem; color:var(--text-secondary);">${anime.type || 'TV'} &bull; Score: ${anime.score || 'N/A'}</div>
@@ -164,7 +160,6 @@ const HomeApp = {
             }, 400);
         });
 
-        // Close dropdown when clicking elsewhere
         document.addEventListener('click', (e) => {
             if (!searchInput.contains(e.target) && !dropdown.contains(e.target)) {
                 dropdown.classList.add('hidden');
