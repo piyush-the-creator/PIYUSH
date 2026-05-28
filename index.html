@@ -3,19 +3,285 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>INFO</title>
+    <title>CineVerse - Ultimate Movie, Anime & News Discovery Hub</title>
+    <meta name="description" content="Discover trending movies, explore popular anime, and read the latest entertainment news on CineVerse.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
 </head>
-<body>
-<h1>HEY THAT'S ME BRO</h1>
-<P>lets go with the basics
-</P>
-<P><B>THAT'S REALLY BOLD</B></P>
-<p><i>this one is itallic</i></p>
-<P><U> underlined</U></P>
-<P><B><I><U>SO WHAT'S NEXT NOW</U></I></B></P>
+<body class="dark-theme">
 
-<P>lets use the br tag to <br>break the line</P>
-<h2> can we add a link to this page</h2>
-</body> 
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Cine<span>Verse</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="anime.html">Anime</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="favorites.html">Watchlist</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button id="themeToggle" class="theme-btn" aria-label="Toggle Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="hamburger" id="hamburgerMenu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-slider" id="heroSlider">
+        <div class="hero-slide active" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), #0b0c10), url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1925&auto=format&fit=crop');">
+            <div class="hero-content">
+                <span class="badge">Trending Now</span>
+                <h1>Explore the Cinematic Multiverse</h1>
+                <p>Streamline your entertainment discovery pipeline. Track movies, filter anime, and analyze updates simultaneously.</p>
+                <div class="hero-buttons">
+                    <a href="movies.html" class="btn btn-primary"><i class="fas fa-play"></i> Browse Movies</a>
+                    <a href="#moodSection" class="btn btn-secondary">Discover Your Mood</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="search-hub-section">
+        <div class="section-container">
+            <div class="search-wrapper">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="globalSearchInput" placeholder="Search across movies, series, titles...">
+                <div class="suggestions-box" id="suggestionsBox"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mood-section" id="moodSection">
+        <div class="section-container">
+            <h2 class="section-title">How are you feeling today?</h2>
+            <p class="section-subtitle">Tailor adaptive structural discovery recommendations to match your mental profile.</p>
+            <div class="mood-grid">
+                <button class="mood-card" data-mood="happy">
+                    <span class="mood-emoji">😂</span>
+                    <h3>Happy</h3>
+                    <p>Lighthearted Comedies</p>
+                </button>
+                <button class="mood-card" data-mood="sad">
+                    <span class="mood-emoji">😢</span>
+                    <h3>Sad</h3>
+                    <p>Feel-good Comforts</p>
+                </button>
+                <button class="mood-card" data-mood="excited">
+                    <span class="mood-emoji">⚡</span>
+                    <h3>Excited</h3>
+                    <p>High-octane Action</p>
+                </button>
+                <button class="mood-card" data-mood="relaxed">
+                    <span class="mood-emoji">🍃</span>
+                    <h3>Relaxed</h3>
+                    <p>Slice of Life / Chill</p>
+                </button>
+            </div>
+            <div id="moodResults" class="mood-results-container hidden">
+                <h3 class="results-heading">Recommended For Your Mood</h3>
+                <div class="card-grid" id="moodResultsGrid"></div>
+            </div>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <section class="content-row">
+            <div class="section-container">
+                <div class="row-header">
+                    <h2><i class="fas fa-film"></i> Trending Movies</h2>
+                    <a href="movies.html" class="view-all">See All <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="card-grid" id="trendingMoviesRow">
+                    </div>
+            </div>
+        </section>
+
+        <section class="content-row">
+            <div class="section-container">
+                <div class="row-header">
+                    <h2><i class="fas fa-tv"></i> Top Popular Anime</h2>
+                    <a href="anime.html" class="view-all">See All <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="card-grid" id="popularAnimeRow"></div>
+            </div>
+        </section>
+
+        <section class="content-row">
+            <div class="section-container">
+                <div class="row-header">
+                    <h2><i class="fas fa-newspaper"></i> Premium Entertainment News</h2>
+                    <a href="news.html" class="view-all">See All <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="news-compact-grid" id="recentNewsRow"></div>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal-overlay id-close-trigger" id="globalDetailsModal">
+        <div class="modal-body glass-panel">
+            <button class="modal-close" id="modalCloseBtn">&times;</button>
+            <div class="modal-dynamic-content" id="modalDynamicContent">
+                </div>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <button id="scrollToTopBtn" title="Scroll To Top Layout"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="js/api.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CineVerse - Ultimate Movie, Anime & News Discovery Hub</title>
+    <meta name="description" content="Discover trending movies, explore popular anime, and read the latest entertainment news on CineVerse.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body class="dark-theme">
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Cine<span>Verse</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="anime.html">Anime</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="favorites.html">Watchlist</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button id="themeToggle" class="theme-btn" aria-label="Toggle Theme">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <div class="hamburger" id="hamburgerMenu">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-slider" id="heroSlider">
+        <div class="hero-slide active" style="background-image: linear-gradient(to bottom, rgba(0,0,0,0.3), #0b0c10), url('https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=1925&auto=format&fit=crop');">
+            <div class="hero-content">
+                <span class="badge">Trending Now</span>
+                <h1>Explore the Cinematic Multiverse</h1>
+                <p>Streamline your entertainment discovery pipeline. Track movies, filter anime, and analyze updates simultaneously.</p>
+                <div class="hero-buttons">
+                    <a href="movies.html" class="btn btn-primary"><i class="fas fa-play"></i> Browse Movies</a>
+                    <a href="#moodSection" class="btn btn-secondary">Discover Your Mood</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="search-hub-section">
+        <div class="section-container">
+            <div class="search-wrapper">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="globalSearchInput" placeholder="Search across movies, series, titles...">
+                <div class="suggestions-box" id="suggestionsBox"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mood-section" id="moodSection">
+        <div class="section-container">
+            <h2 class="section-title">How are you feeling today?</h2>
+            <p class="section-subtitle">Tailor adaptive structural discovery recommendations to match your mental profile.</p>
+            <div class="mood-grid">
+                <button class="mood-card" data-mood="happy">
+                    <span class="mood-emoji">😂</span>
+                    <h3>Happy</h3>
+                    <p>Lighthearted Comedies</p>
+                </button>
+                <button class="mood-card" data-mood="sad">
+                    <span class="mood-emoji">😢</span>
+                    <h3>Sad</h3>
+                    <p>Feel-good Comforts</p>
+                </button>
+                <button class="mood-card" data-mood="excited">
+                    <span class="mood-emoji">⚡</span>
+                    <h3>Excited</h3>
+                    <p>High-octane Action</p>
+                </button>
+                <button class="mood-card" data-mood="relaxed">
+                    <span class="mood-emoji">🍃</span>
+                    <h3>Relaxed</h3>
+                    <p>Slice of Life / Chill</p>
+                </button>
+            </div>
+            <div id="moodResults" class="mood-results-container hidden">
+                <h3 class="results-heading">Recommended For Your Mood</h3>
+                <div class="card-grid" id="moodResultsGrid"></div>
+            </div>
+        </div>
+    </section>
+
+    <main class="main-content">
+        <section class="content-row">
+            <div class="section-container">
+                <div class="row-header">
+                    <h2><i class="fas fa-film"></i> Trending Movies</h2>
+                    <a href="movies.html" class="view-all">See All <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="card-grid" id="trendingMoviesRow">
+                    </div>
+            </div>
+        </section>
+
+        <section class="content-row">
+            <div class="section-container">
+                <div class="row-header">
+                    <h2><i class="fas fa-tv"></i> Top Popular Anime</h2>
+                    <a href="anime.html" class="view-all">See All <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="card-grid" id="popularAnimeRow"></div>
+            </div>
+        </section>
+
+        <section class="content-row">
+            <div class="section-container">
+                <div class="row-header">
+                    <h2><i class="fas fa-newspaper"></i> Premium Entertainment News</h2>
+                    <a href="news.html" class="view-all">See All <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="news-compact-grid" id="recentNewsRow"></div>
+            </div>
+        </section>
+    </main>
+
+    <div class="modal-overlay id-close-trigger" id="globalDetailsModal">
+        <div class="modal-body glass-panel">
+            <button class="modal-close" id="modalCloseBtn">&times;</button>
+            <div class="modal-dynamic-content" id="modalDynamicContent">
+                </div>
+        </div>
+    </div>
+
+    <div class="toast-container" id="toastContainer"></div>
+
+    <button id="scrollToTopBtn" title="Scroll To Top Layout"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="js/api.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
