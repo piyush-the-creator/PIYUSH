@@ -1,12 +1,9 @@
 /**
  * CineVerse Shared Rendering UI Library
- * Builds UI widgets, manages theme changes, updates watchlists, and handles modals.
+ * Handles layout generation, adaptive theme switching, and live modal data injections.
  */
 
 const CineVerseUI = {
-    /**
-     * Initializes Global Shared System Elements (Theme, Back-to-Top, Navigation)
-     */
     initCommonUI() {
         this.setupThemeEngine();
         this.setupHamburgerMenu();
@@ -28,7 +25,7 @@ const CineVerseUI = {
             document.documentElement.setAttribute('data-theme', targetTheme);
             localStorage.setItem('cineverse-theme', targetTheme);
             this.updateThemeIcon(toggleBtn, targetTheme);
-            this.showToast(`Switched to ${targetTheme} presentation profile.`, 'info');
+            this.showToast(`Switched to ${targetTheme} profile.`, 'info');
         });
     },
 
@@ -75,12 +72,8 @@ const CineVerseUI = {
         };
 
         if (closeBtn) closeBtn.addEventListener('click', dismissModal);
-        
-        // Close modal when clicking outside the content box
         modal.addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal-backdrop')) {
-                dismissModal();
-            }
+            if (e.target.classList.contains('modal-backdrop')) dismissModal();
         });
     },
 
@@ -102,21 +95,17 @@ const CineVerseUI = {
         }, 3500);
     },
 
-    /**
-     * Standard Generic Card Factory Component
-     */
     createItemCard(item, systemContext) {
         const isMovie = systemContext === 'movie';
-        const itemId = item.id;
-        const title = isMovie ? item.title : item.title;
+        const itemId = item.id || item.mal_id;
+        const title = item.title;
         const rating = isMovie ? (item.vote_average ? item.vote_average.toFixed(1) : 'N/A') : (item.score ? item.score : 'N/A');
-        const date = isMovie ? (item.release_date ? item.release_date.split('-')[0] : 'Unknown') : (item.type || 'TV');
+        const date = isMovie ? (item.release_date ? item.release_date.split('-')[0] : 'Movie') : (item.type || 'TV');
         const desc = isMovie ? item.overview : item.synopsis;
         
+        // Dynamic fallback poster image allocation
         let posterUrl = 'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?q=80&w=400&auto=format&fit=crop';
-        if (isMovie && item.poster_path) {
-            posterUrl = `https://image.tmdb.org/t/p/w500${item.poster_path}`;
-        } else if (!isMovie && item.images?.jpg?.image_url) {
+        if (item.images?.jpg?.image_url) {
             posterUrl = item.images.jpg.image_url;
         }
 
@@ -142,7 +131,6 @@ const CineVerseUI = {
             </div>
         `;
 
-        // Wire active tracking events
         card.querySelector('.details-trigger-btn').addEventListener('click', () => {
             this.openDetailedModal(item, systemContext);
         });
@@ -159,18 +147,19 @@ const CineVerseUI = {
     checkFavoriteStatus(id, context) {
         const storeKey = context === 'movie' ? 'cineverse-fav-movies' : 'cineverse-fav-anime';
         const currentList = JSON.parse(localStorage.getItem(storeKey)) || [];
-        return currentList.some(item => item.id == id);
+        return currentList.some(item => (item.id || item.mal_id) == id);
     },
 
     toggleWatchlistState(item, context, element) {
         const storeKey = context === 'movie' ? 'cineverse-fav-movies' : 'cineverse-fav-anime';
         let currentList = JSON.parse(localStorage.getItem(storeKey)) || [];
-        const index = currentList.findIndex(i => i.id == item.id);
+        const itemId = item.id || item.mal_id;
+        const index = currentList.findIndex(i => (i.id || i.mal_id) == itemId);
 
         if (index > -1) {
             currentList.splice(index, 1);
             element.classList.remove('active');
-            this.showToast('Removed from Watchlist collection.', 'info');
+            this.showToast('Removed from Watchlist.', 'info');
         } else {
             currentList.push(item);
             element.classList.add('active');
@@ -179,9 +168,6 @@ const CineVerseUI = {
         localStorage.setItem(storeKey, JSON.stringify(currentList));
     },
 
-    /**
-     * Launches Popovers Containing Trailers or System Meta Logs
-     */
     async openDetailedModal(item, context) {
         const modal = document.getElementById('globalModal');
         const body = document.getElementById('modalBody');
@@ -191,28 +177,15 @@ const CineVerseUI = {
         modal.classList.remove('hidden');
 
         const isMovie = context === 'movie';
-        let title = isMovie ? item.title : item.title;
-        let rating = isMovie ? (item.vote_average || 'N/A') : (item.score || 'N/A');
-        let desc = isMovie ? item.overview : item.synopsis;
-        let posterUrl = isMovie ? 
-            (item.poster_path ? `https://image.tmdb.org/t/p/w500${item.poster_path}` : 'https://images.unsplash.com/photo-1594909122845-11baa439b7bf?q=80&w=400&auto=format&fit=crop') : 
-            item.images?.jpg?.large_image_url;
+        const title = item.title;
+        const rating = isMovie ? (item.vote_average || 'N/A') : (item.score || 'N/A');
+        const desc = isMovie ? item.overview : item.synopsis;
+        const posterUrl = item.images?.jpg?.large_image_url || item.images?.jpg?.image_url;
 
         let dynamicTrailerFrame = '';
-
-        if (isMovie && item.id > 200) { // Call api details if not using fallback
-            const fullDetails = await CineVerseAPI.fetchMovieDetails(item.id);
-            if (fullDetails && fullDetails.videos?.results) {
-                const trailer = fullDetails.videos.results.find(v => v.type === 'Trailer' && v.site === 'YouTube');
-                if (trailer) {
-                    dynamicTrailerFrame = `
-                        <div class="video-container">
-                            <iframe src="https://www.youtube.com/embed/${trailer.key}" frameborder="0" allowfullscreen></iframe>
-                        </div>
-                    `;
-                }
-            }
-        } else if (!isMovie && item.trailer?.youtube_id) {
+        
+        // Extract embed code if trailer fields are natively populated by Jikan
+        if (item.trailer?.youtube_id) {
             dynamicTrailerFrame = `
                 <div class="video-container">
                     <iframe src="https://www.youtube.com/embed/${item.trailer.youtube_id}" frameborder="0" allowfullscreen></iframe>
@@ -229,7 +202,7 @@ const CineVerseUI = {
                     <h2>${title}</h2>
                     <div class="modal-meta-row">
                         <span><i class="fas fa-star" style="color:#ffcc00;"></i> ${rating}</span>
-                        <span>${isMovie ? 'Release: ' + (item.release_date || 'N/A') : 'Episodes: ' + (item.episodes || 'N/A')}</span>
+                        <span>${isMovie ? 'Format: Movie' : 'Episodes: ' + (item.episodes || 'N/A')}</span>
                     </div>
                     <p class="modal-synopsis">${desc || 'Detailed profile metrics are still being compiled for this entity record.'}</p>
                     ${dynamicTrailerFrame}
