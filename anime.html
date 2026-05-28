@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Anime resource tracking platform via Jikan Core framework.">
+    <title>CineVerse | Anime Portal</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/anime.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Cine<span>Verse</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="anime.html" class="active">Anime</a></li>
+                <li><a href="news.html">News</a></li>
+                <li><a href="favorites.html">Watchlist</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button id="themeToggle" class="theme-btn"><i class="fas fa-moon"></i></button>
+                <div class="hamburger" id="hamburgerMenu">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <header class="page-banner anime-banner">
+        <div class="banner-overlay">
+            <h1>Otaku Universe Index</h1>
+            <p>Deep-dive comprehensive tracking across contemporary series, legendary OVAs, and popular community titles.</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="filter-panel">
+            <div class="search-bar-extended">
+                <input type="text" id="animeSearchInput" placeholder="Look up title parameters, catalog keywords...">
+                <button id="animeSearchBtn" class="btn btn-primary">Search</button>
+            </div>
+            <div class="genre-filter-wrapper">
+                <label for="genreDropdown">Filter by Demographics/Genre:</label>
+                <select id="genreDropdown">
+                    <option value="">All Structural Categories</option>
+                    <option value="1">Action</option>
+                    <option value="2">Adventure</option>
+                    <option value="4">Comedy</option>
+                    <option value="8">Drama</option>
+                    <option value="10">Fantasy</option>
+                    <option value="22">Romance</option>
+                    <option value="24">Sci-Fi</option>
+                    <option value="36">Slice of Life</option>
+                </select>
+            </div>
+        </section>
+
+        <section class="grid-container" id="animeDisplayGrid">
+            </section>
+
+        <div class="pagination-controls">
+            <button id="animePrevBtn" class="btn btn-secondary" disabled>Back</button>
+            <span id="animePageLabel">Catalog Segment 1</span>
+            <button id="animeNextBtn" class="btn btn-secondary">Forward</button>
+        </div>
+    </main>
+
+    <div id="globalModal" class="modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-wrapper">
+            <button class="modal-close" id="modalCloseBtn">&times;</button>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <div id="toastContainer" class="toast-container"></div>
+    <button id="scrollToTop" class="scroll-to-top"><i class="fas fa-arrow-up"></i></button>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-about">
+                <h3>Cine<span>Verse</span></h3>
+                <p>&copy; 2026 CineVerse Media Group.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/anime.js"></script>
+</body>
+</html>
