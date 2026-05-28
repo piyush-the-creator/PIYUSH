@@ -1,0 +1,80 @@
+/* Specialized Movie Section Stylesheet */
+.page-banner {
+    width: 100%;
+    height: 350px;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.4), var(--bg-primary)), url('https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1920&auto=format&fit=crop');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-top: 60px;
+}
+.banner-overlay h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    letter-spacing: 1px;
+}
+.banner-overlay p {
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.filter-panel {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-glass);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.search-bar-extended {
+    display: flex;
+    gap: 1rem;
+}
+.search-bar-extended input {
+    flex-grow: 1;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border-glass);
+    border-radius: 8px;
+    padding: 0.75rem 1rem;
+    color: #fff;
+    font-family: inherit;
+}
+.filter-options {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+.filter-tab {
+    background: none;
+    border: 1px solid var(--border-glass);
+    color: var(--text-secondary);
+    padding: 0.5rem 1.2rem;
+    border-radius: 20px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: var(--transition-smooth);
+}
+.filter-tab:hover, .filter-tab.active {
+    background: var(--text-primary);
+    color: var(--bg-primary);
+    border-color: var(--text-primary);
+    font-weight: 600;
+}
+.pagination-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+    margin: 3rem 0;
+}
+#currentPageLabel {
+    font-weight: 600;
+}
