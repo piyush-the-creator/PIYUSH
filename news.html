@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Stay up to date with entertainment industry headlines.">
+    <title>CineVerse | Entertainment Journalism</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/news.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">Cine<span>Verse</span></a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="movies.html">Movies</a></li>
+                <li><a href="anime.html">Anime</a></li>
+                <li><a href="news.html" class="active">News</a></li>
+                <li><a href="favorites.html">Watchlist</a></li>
+                <li><a href="about.html">About</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button id="themeToggle" class="theme-btn"><i class="fas fa-moon"></i></button>
+                <div class="hamburger" id="hamburgerMenu">
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                    <div class="bar"></div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container separator-top">
+        <header class="section-header">
+            <h1>Newswire Center</h1>
+            <p>Real-time corporate updates, artistic announcements, and industry analysis reports.</p>
+        </header>
+
+        <section class="news-category-selector">
+            <button class="news-tab active" data-topic="entertainment">Global Entertainment</button>
+            <button class="news-tab" data-topic="movie news">Hollywood & Cinema</button>
+            <button class="news-tab" data-topic="anime news">Anime Industries</button>
+        </section>
+
+        <section class="news-layout-grid" id="newsLayoutGrid">
+            </section>
+    </main>
+
+    <div id="toastContainer" class="toast-container"></div>
+    <button id="scrollToTop" class="scroll-to-top"><i class="fas fa-arrow-up"></i></button>
+
+    <script src="js/api.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/news.js"></script>
+</body>
+</html>
