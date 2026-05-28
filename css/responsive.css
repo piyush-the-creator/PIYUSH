@@ -1,0 +1,58 @@
+/* Responsive Adaptation Profiles System Layers */
+@media (max-width: 1024px) {
+    .hero-title { font-size: 2.8rem; }
+    .hero-desc { font-size: 1rem; }
+    .grid-container { grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); }
+}
+
+@media (max-width: 768px) {
+    /* Hamburger Menu Triggering Configurations */
+    .hamburger {
+        display: block !important;
+        cursor: pointer;
+    }
+    .hamburger .bar {
+        width: 25px;
+        height: 3px;
+        background-color: var(--text-primary);
+        margin: 5px 0;
+        transition: var(--transition-smooth);
+    }
+    /* Transform active icon states */
+    .hamburger.active-toggle .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .hamburger.active-toggle .bar:nth-child(2) { opacity: 0; }
+    .hamburger.active-toggle .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+    .nav-links {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        height: calc(100vh - 70px);
+        background: var(--bg-secondary);
+        flex-direction: column;
+        align-items: center;
+        padding-top: 3rem;
+        transition: var(--transition-smooth);
+        z-index: 999;
+    }
+    .nav-links.active-menu { left: 0; }
+    .search-box-container input { width: 160px; }
+    .search-box-container input:focus { width: 200px; }
+
+    .hero-slider-container { height: 60vh; }
+    .hero-title { font-size: 2.2rem; }
+    .modal-detail-grid { grid-template-columns: 1fr; }
+    .modal-poster { max-width: 300px; margin: 0 auto; }
+    .footer-container { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+@media (max-width: 480px) {
+    .hero-title { font-size: 1.8rem; }
+    .search-box-container { display: none; } /* Drop redundant small view items */
+    .section-header h2 { font-size: 1.4rem; }
+    .modal-body { padding: 1.5rem; }
+}
+
+/* Explicit fallback state declaration for hamburger core visibility */
+.hamburger { display: none; }
